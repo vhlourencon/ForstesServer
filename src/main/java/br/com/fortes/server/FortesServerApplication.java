@@ -1,0 +1,13 @@
+package br.com.fortes.server;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FortesServerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FortesServerApplication.class, args);
+	}
+
+}
