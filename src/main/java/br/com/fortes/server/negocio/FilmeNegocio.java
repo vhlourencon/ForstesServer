@@ -1,11 +1,12 @@
 package br.com.fortes.server.negocio;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import br.com.fortes.server.dao.FilmeDAO;
 import br.com.fortes.server.exception.GenericException;
 import br.com.fortes.server.model.FilmeModel;
-
 
 @Service
 public class FilmeNegocio extends GenericNegocio<FilmeModel, FilmeDAO, GenericException> {

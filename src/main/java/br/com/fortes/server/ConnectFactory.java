@@ -23,7 +23,7 @@ public class ConnectFactory {
 
 	private static SessionFactory getSessionFactory()  {
 		if (sessionFactory == null) {
-			SessionFactory sessionFactory = new Configuration().configure("br/com/fortes/server/Hibernate.cfg.xml").buildSessionFactory();
+			SessionFactory sessionFactory = new Configuration().configure("Hibernate.cfg.xml").buildSessionFactory();
 			sessionFactory.openSession();
 			return sessionFactory;
 		}

@@ -16,9 +16,9 @@ public abstract class GenericDAO<GENERICMODEL extends GenericModel>
 
         public GENERICMODEL salvar(GENERICMODEL vo) throws SQLException {
            
-            
-        	   Session session = ConnectFactory.getSession();
-              return  (GENERICMODEL) session.save(vo);
+        	 Session session = ConnectFactory.getSession();
+             session.save(vo);
+             return vo;
         }
 
         public void alterar(GENERICMODEL model) throws SQLException {
@@ -29,7 +29,7 @@ public abstract class GenericDAO<GENERICMODEL extends GenericModel>
 
         public void excluir(GENERICMODEL model) throws SQLException {
         	 Session session = ConnectFactory.getSession();
-        	 session.delete(model);
+        	 session.remove(model);
         }
 
      
@@ -60,11 +60,11 @@ public abstract class GenericDAO<GENERICMODEL extends GenericModel>
         }
 
       
-        public ArrayList<GenericModel> obterTodos(Class c) throws SQLException {
+        public ArrayList<GENERICMODEL> obterTodos(Class c) throws SQLException {
             Session session = ConnectFactory.getSession();
             Query select = session.createQuery(" FROM " + c.getCanonicalName() + " g");
      
-            ArrayList<GenericModel> lista = (ArrayList<GenericModel>) select.getResultList();
+            ArrayList<GENERICMODEL> lista = (ArrayList<GENERICMODEL>) select.getResultList();
             return lista;
             
           

@@ -1,5 +1,6 @@
 package br.com.fortes.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fortes.server.exception.GenericException;
@@ -12,8 +13,15 @@ public class TesteHibernate {
 		// TODO Auto-generated method stub
 		FilmeNegocio filmeNegocio = new FilmeNegocio();
 		
-		FilmeModel filmeModel  = 	filmeNegocio.obterPorId(FilmeModel.class,1l);
-		System.out.println(filmeModel.getNome());
+		
+		ArrayList<FilmeModel> lista  =(ArrayList<FilmeModel>) filmeNegocio.obterTodos(FilmeModel.class);
+	//	lista.get(0).setAlugado(true);
+		for (FilmeModel filmeModel : lista) {
+			System.out.println(filmeModel.getNome());
+		//	System.out.println(filmeModel.isAlugado());
+		}
+		filmeNegocio.excluir(lista.get(lista.size() -1));
+		
        
 	}
 

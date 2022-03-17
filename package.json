@@ -1,0 +1,19 @@
+{
+  "name": "fortesserver",
+  "version": "1.0.0",
+  "description": "Para criação da API REST utilizei o srpingboot \r para facilitar e encurtar todo o processo de geração de geração e ciclo de vida dos beans.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vhlourencon/ForstesServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vhlourencon/ForstesServer/issues"
+  },
+  "homepage": "https://github.com/vhlourencon/ForstesServer#readme"
+}

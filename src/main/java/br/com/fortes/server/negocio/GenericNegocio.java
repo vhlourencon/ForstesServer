@@ -2,6 +2,7 @@ package br.com.fortes.server.negocio;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.Session;
 
@@ -55,24 +56,46 @@ public abstract class GenericNegocio<GENERICMODEL extends GenericModel, DAOG ext
 	public void alterar(GENERICMODEL model) throws EXCEPTION {
 		EXCEPTION exc = validar(model);
 		if (exc == null) {
+
+			Session session = ConnectFactory.getSession();
 			try {
+				session.beginTransaction();
 				dao.alterar(model);
+				session.getTransaction().commit();
 
 			} catch (Exception e) {
 				e.printStackTrace();
+				session.getTransaction().rollback();
+				e.printStackTrace();
 				throw (EXCEPTION) new Exception("Ocorreu um erro ao tentar alterar:\n" + e.getMessage());
+			} finally {
+				if (session != null && session.isOpen()) {
+					session.close();
+				}
 			}
+
 		} else {
 			throw exc;
 		}
 	}
 
 	public void excluir(GENERICMODEL model) throws EXCEPTION {
+		Session session = ConnectFactory.getSession();
 		try {
+			session.beginTransaction();
 			dao.excluir(model);
-		} catch (SQLException e) {
+			session.getTransaction().commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
 			throw (EXCEPTION) new Exception("Ocorreu um erro ao tentar excluir:\n" + e.getMessage());
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
+		
 	}
 
 	public GENERICMODEL obterPorId(GENERICMODEL model) throws EXCEPTION {
@@ -111,12 +134,12 @@ public abstract class GenericNegocio<GENERICMODEL extends GenericModel, DAOG ext
 		}
 	}
 
-	public ArrayList<GENERICMODEL> obterTodos(Class classe) throws Exception {
+	public List<GENERICMODEL> obterTodos(Class classe) throws Exception {
 
 		Session session = ConnectFactory.getSession();
 		try {
 			session.beginTransaction();
-			ArrayList<GENERICMODEL> lista = (ArrayList<GENERICMODEL>) dao.obterTodos(classe);
+			List<GENERICMODEL> lista = (List<GENERICMODEL>) dao.obterTodos(classe);
 			session.getTransaction().commit();
 			return lista;
 		} catch (Exception e) {

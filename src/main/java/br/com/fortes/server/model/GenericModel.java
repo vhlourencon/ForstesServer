@@ -1,5 +1,6 @@
 package br.com.fortes.server.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 
@@ -14,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public abstract class GenericModel  {
+public abstract class GenericModel  implements Serializable {
 
 	@Id
 	@Column(nullable = false)
